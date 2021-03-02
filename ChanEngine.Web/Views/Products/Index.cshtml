@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ChanEngine.Entities.Models.ProductDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Meest verkochte artikelen</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantitySold)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gtin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MerchantProductNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityStock)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantitySold)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gtin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MerchantProductNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityStock)
+                </td>
+                @*<td>
+                    <input id="txt" class="input input-group-text" placeholder="voer getal in" value="" />
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ProductMerchantNumber">Update</a>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

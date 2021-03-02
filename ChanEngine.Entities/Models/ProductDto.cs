@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ChanEngine.Entities.Models
 {
-    public class OrderedProducts
+    public class ProductDto
     {
         public string Gtin { get; set; }
         

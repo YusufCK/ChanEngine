@@ -3,6 +3,7 @@ using ChanEngine.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChanEngine.Console
@@ -21,8 +22,8 @@ namespace ChanEngine.Console
             try
             {
                 var orderLines = await GetBestSoldProducts();
+                await UpdateProductStock("25", orderLines.ElementAt(2).MerchantProductNo);
                 DisplayMostSoldProducts(orderLines);
-                
             }
             catch (Exception ex)
             {
@@ -40,7 +41,7 @@ namespace ChanEngine.Console
             foreach (var product in orderLines)
             {
                 var stock = GetProductStock(product.MerchantProductNo).Result;
-
+                
                 System.Console.WriteLine($"{num++}\t|  {product.Description}\t  | {product.Gtin}  |  \t{product.Quantity}\t    | {stock.ToString()}");
                 System.Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
             }
@@ -56,6 +57,12 @@ namespace ChanEngine.Console
         {
             return await _provider.GetRequiredService<IHttpClientProductService>().GetProductStock(merchantProductNo);
         }
+
+        private static async Task UpdateProductStock(string quantity, string merchantProductNo)
+        {
+            await _provider.GetRequiredService<IHttpClientProductService>().UpdateProductStock(merchantProductNo, quantity);
+        }
+
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IHttpClientOrderService, HttpClientOrderService>();
