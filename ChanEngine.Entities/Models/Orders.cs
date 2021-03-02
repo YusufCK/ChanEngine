@@ -8,13 +8,13 @@ namespace ChanEngine.Entities.Models
     public class Orders
     {
         [JsonPropertyName("Content")]
-        public List<Content> Content { get; set; }
+        public List<Content> Content{ get; set; }
     }
 
     public class Content
     {
         [JsonPropertyName("Lines")]
-        public List<Line> Orders { get; set; }
+        public List<Line> OrderLines { get; set; }
     }
 
     public class Line
