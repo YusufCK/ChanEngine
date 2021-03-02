@@ -44,7 +44,7 @@ namespace ChanEngine.Services
         public List<Line> TopFiveSoldItemsQuery(List<Content> orders)
         {
             var MostSoldItemsQuery =
-                orders.SelectMany(o => o.OrderLines)
+                orders.SelectMany(o => o.Lines)
                           .GroupBy(p => new { p.Description, p.Gtin, p.MerchantProductNo })
                           .Select(p => new Line()
                           {

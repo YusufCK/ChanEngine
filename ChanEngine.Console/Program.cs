@@ -34,12 +34,14 @@ namespace ChanEngine.Console
             int num = 1;
 
             System.Console.ForegroundColor = ConsoleColor.DarkGreen;
-            System.Console.WriteLine("\nNUMBER  |  PRODUCT TITLE\t\t\t\t  | \tGTIN\t   | QUANTITY SOLD");
+            System.Console.WriteLine("\nNUMBER  |  PRODUCT TITLE\t\t\t\t  | \tGTIN\t   | QUANTITY SOLD  |  QUANTITY STOCK");
             System.Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
 
             foreach (var product in orderLines)
             {
-                System.Console.WriteLine($"{num++}\t|  {product.Description}\t  | {product.Gtin}  |  \t{product.Quantity}\t");
+                var stock = GetProductStock(product.MerchantProductNo).Result;
+
+                System.Console.WriteLine($"{num++}\t|  {product.Description}\t  | {product.Gtin}  |  \t{product.Quantity}\t    | {stock.ToString()}");
                 System.Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
             }
             System.Console.ResetColor();
@@ -48,11 +50,17 @@ namespace ChanEngine.Console
         private static async Task<List<Line>> GetBestSoldProducts()
         {
             return await _provider.GetRequiredService<IHttpClientOrderService>().GetMostSoldProducts();
+        }
 
+        private static async Task<int> GetProductStock(string merchantProductNo)
+        {
+            return await _provider.GetRequiredService<IHttpClientProductService>().GetProductStock(merchantProductNo);
         }
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IHttpClientOrderService, HttpClientOrderService>();
+            services.AddScoped<IHttpClientProductService, HttpClientProductService>();
+
         }
     }
 }

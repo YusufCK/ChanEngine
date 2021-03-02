@@ -7,14 +7,20 @@ namespace ChanEngine.Entities.Models
 {
     public class Orders
     {
-        [JsonPropertyName("Content")]
-        public List<Content> Content{ get; set; }
+        //[JsonPropertyName("Content")]
+        public List<Content> Content { get; set; }
     }
 
+    public class Product
+    {
+        [JsonPropertyName("Stock")]
+        public int Stock { get; set; }
+    }
     public class Content
     {
-        [JsonPropertyName("Lines")]
-        public List<Line> OrderLines { get; set; }
+        [JsonPropertyName("Content")]
+        public Product Product { get; set; }
+        public List<Line> Lines { get; set; }
     }
 
     public class Line

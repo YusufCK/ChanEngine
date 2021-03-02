@@ -13,7 +13,7 @@ namespace ChanEngine.Tests
             {
                 new Content
                 {
-                    OrderLines = new List<Line>
+                    Lines = new List<Line>
                     {
                         new Line{MerchantProductNo="1", Description="Zwarte T-Shirt", Gtin="1122334455", Quantity= 1},
                         new Line{MerchantProductNo="1", Description="Zwarte T-Shirt", Gtin="1122334455", Quantity= 1},
